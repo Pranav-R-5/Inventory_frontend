@@ -1,27 +1,136 @@
-<template>
+ <template>
   <div id="blibliApp">
-    <header>
-      <div class="wrapper">
-        <HelloWorld msg="Vite + Vue 3" />
+    <headercomponet :title="'Pranav'" @alertmessage="search"></headercomponet>
 
-        <nav class="button">
-          <router-link
-            to="/"
-            class="home-button"
-          >
-            Home
-          </router-link>
-          <router-link
-            to="/about"
-            class="about-button"
-          >
-            About
-          </router-link>
-        </nav>
-      </div>
-    </header>
 
-    <router-view />
+    <!-- <div class="headerflex">
+        <div>
+            <img class="logos" :src="logo"/>
+            <input @keyup.enter="search(msg)" type="text" size="40" style="padding-right: 30px;"  placeholder="Search..">
+            <button @click="search(msg)">Search</button>
+
+
+        </div>
+        <div class="headerflex">
+            <nav class="headerflex">
+              <button @click="login(message)"> Login</button>
+                <a href="http://127.0.0.1:5500/client/Allproducts.html" style="padding:0px 60px 0px 60px;"> All products</a>
+                <a href="http://127.0.0.1:5500/client/cart.html"> Cart</a>
+            </nav>  
+        </div>
+    </div> -->
+    <div class="bodypage">
+      <filtercomponent></filtercomponent>
+        <!-- <div class="filters">
+            <section>
+            <h3>categories</h3>
+
+                <form>
+                  <div>Checked cateogories: {{ checkedcategories }}</div>
+                    <div>
+                      <input type="checkbox"  value="Electronics" v-model="checkedcategories">
+                      <label for="Electronics">Electronics</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Beauty" v-model="checkedcategories">
+                      <label for="Beauty">Beauty</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Fashion" v-model="checkedcategories">
+                      <label for="Fashion">Fashion</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Sports" v-model="checkedcategories">
+                      <label for="Sports">Sports</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Groceries" v-model="checkedcategories">
+                      <label for="Groceries">Groceries</label>
+                    </div>    
+                </form> 
+            </section>
+            <br>
+            <section>
+              
+                <div>Gender: {{ selected }}</div>
+                <select v-model="selected">
+                  <option disabled value="">Please select one</option>
+                  <option>male</option>
+                  <option>female</option>
+                  <option>other</option>
+                </select>
+            </section>
+
+            <section>
+                <h3>Brands</h3>
+                    <form>
+                    <div>Brands selected: {{Brands}}</div>
+                    <div>
+                      <input type="checkbox"  value="Nike" v-model="Brands">
+                      <label for="Nike">Nike</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Puma" v-model="Brands">
+                      <label for="Puma">Puma</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Adidas" v-model="Brands">
+                      <label for="Adidas">Adidas</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" value="Zara" v-model="Brands">
+                      <label for="Zara">Zara</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Dell" v-model="Brands">
+                      <label for="Dell">Dell</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Philips" v-model="Brands">
+                      <label for="Philips">Philips</label>
+                    </div>
+                    <div>
+                      <input type="checkbox"  value="Hp" v-model="Brands">
+                      <label for="Hp">Hp</label>
+                    </div>      
+                  </form> 
+            </section>
+
+        </div> -->
+        <productcomponent></productcomponent>
+        <!-- <div class="products">
+          <div>
+            <h1 style="font-style: italic;">Best of Electronics:</h1>
+            <section>
+              <div class="image-container">
+                <div v-for="product in products" :key="product">
+                  <div class = "productcard">
+                    <img class="image" :src="product.img" >
+                    <div>
+                      <h5>{{product.name}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div>
+            <h1 style="font-style: italic;">Fashion:</h1>
+            <section>
+              <div class="image-container">
+                <div v-for="product in products" :key="product">
+                  <div class = "productcard">
+                    <img class="image" :src="product.img" >
+                    <div>
+                      <h5>{{product.name}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+      </div> -->
+  </div>
   </div>
 </template>
 
@@ -30,97 +139,52 @@
 <style lang="scss" scoped>
 @import '@blibli/blue-design-tokens/dist/tokens-default.scss';
 
-#blibliApp {
-  margin: 0 auto;
-  font-family: $blu-font-family-body-text;
-  background: #242424;
-}
-
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  text-align: center;
-  margin-top: 2rem;
-  font-family: 'Segoe UI';
-}
-
-nav a.router-link-exact-active {
-  color: hsla(160, 100%, 37%, 1);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid rgba(84, 84, 84, 0.48);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-.home-button, .about-button{
-  font-size: 1rem;
-  color: white;
-}
-
-.home-button:hover, .about-button:hover{
-  background-color: hsla(160, 100%, 37%, 0.2);
-  border-radius: 0.4em;
-}
-
-@media (max-width: 768px) {
-  header{
-    margin-bottom: 5%;
-  }
-}
-
-@media (max-width: 425px) {
-  header{
-    margin-bottom: 10%;
-  }
-}
-
-@media (min-width: 1024px) {
-  #blibliApp {
-    padding: 0% 10%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  header {
+// h5{
+//     transition:font-size 1s;
+//     text-align: center;
+// }
+// h5:hover{
+//     color: blueviolet;
+//     font-size: 20px;
+// }
+.bodypage{
     display: flex;
-    place-items: center;
-  }
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  nav {
-    text-align: center;
-    margin-left: -1rem;
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
+// .filters{
+//     flex: 0 0 280px;
+//     max-width: 280px;
+//     padding: 0px 20px 0px 0px;
+//     background-color:white;
+//     border-color: palegoldenrod;
+//     border-style: double;
+    
+// }
+// .products{
+//     /* background-color:; */
+//     flex-direction: row;
+//     flex-grow: 1;
+//     overflow: auto;
+// }
+// .productcard{
+    
+//     padding: 10px;
+//     border: 4px solid seashell;
+// }
+// .image{
+    
+//     min-width: 200px;    
+    
+//     margin-bottom: 10px; 
+//     overflow-y: hidden;
+   
+// }
+// .image-container{
+//     display: flex;
+//     width: 100%;
+//     overflow-x: scroll;
+// }
 </style>
